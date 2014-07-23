@@ -2,9 +2,8 @@ package com.vivaxy.wechat.servlet;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.vivaxy.wechat.object.message.Text;
-import com.vivaxy.wechat.object.msg.Message;
-import com.vivaxy.wechat.object.msg.MsgType;
+import com.vivaxy.wechat.bean.message.in.Message;
+import com.vivaxy.wechat.bean.message.in.MsgType;
 import com.vivaxy.wechat.tool.ConfUtil;
 import com.vivaxy.wechat.tool.LogUtil;
 import com.vivaxy.wechat.tool.SHA1;
@@ -58,7 +57,7 @@ public class WechatApi extends HttpServlet {
         //根据消息类型获取对应的消息内容
         if (msgType.equals(MsgType.Text.toString())) {
             //文本消息
-            Text inputText = (Text) inputMsg;
+
         }
 
 //        输出返回值

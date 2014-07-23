@@ -1,15 +1,13 @@
 package com.vivaxy.wechat.test;
 
 import com.thoughtworks.xstream.XStream;
-import com.vivaxy.wechat.object.Conf;
+import com.vivaxy.wechat.bean.message.out.Item;
+import com.vivaxy.wechat.bean.message.out.News;
 import com.vivaxy.wechat.tool.LogUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Author : vivaxy
@@ -20,22 +18,31 @@ import java.io.FileNotFoundException;
 public class Test extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        LogUtil log = new LogUtil();
         response.setCharacterEncoding("UTF-8");//设置返回值编码
-        String path = this.getClass().getClassLoader().getResource(File.separator).getPath();
-        log.put("", path);
-        File file = new File(path + "conf.xml");
-        try {
-            XStream xstream = new XStream();
-            xstream.alias("xml", Conf.class);
-            FileInputStream fis = new FileInputStream(file);
-            Conf conf = (Conf) xstream.fromXML(fis);
-            String WechatToken = conf.getWechatToken();
-            log.put("", WechatToken);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            log.put("ERROR", "获取微信公众号的token");
-            return;
-        }
+        TestNews();
+    }
+
+    public void TestNews() {
+        LogUtil log = new LogUtil();
+        News news = new News();
+        Item item0 = new Item();
+        item0.setPicUrl("setPicUrl0");
+        item0.setDescription("setDescription0");
+        item0.setTitle("setTitle0");
+        item0.setUrl("setUrl0");
+        Item item1 = new Item();
+        item1.setPicUrl("setPicUrl1");
+        item1.setDescription("setDescription1");
+        item1.setTitle("setTitle1");
+        item1.setUrl("setUrl1");
+        news.add(item0);
+        news.add(item1);
+        news.setFromUserName("setFromUserName");
+        news.setToUserName("setToUserName");
+        news.setArticleCount(2L);
+        XStream xstream = new XStream();
+        xstream.alias("xml", News.class);
+        xstream.alias("item", Item.class);
+        log.put("", "\n" + xstream.toXML(news));
     }
 }

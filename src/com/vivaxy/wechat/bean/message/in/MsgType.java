@@ -1,10 +1,10 @@
-package com.vivaxy.wechat.object.msg;
+package com.vivaxy.wechat.bean.message.in;
 
 /**
  * Author : vivaxy
  * Date   : 2014/7/23 8:53
  * Project: wechat
- * Package: com.vivaxy.wechat.object.msg
+ * Package: com.vivaxy.wechat.bean.msg
  */
 public enum MsgType {
 
@@ -14,7 +14,8 @@ public enum MsgType {
     Video("video"),
     Voice("voice"),
     Location("location"),
-    Link("link");
+    Link("link"),
+    Event("event");
     private String msgType;
 
     MsgType(String msgType) {
@@ -22,7 +23,7 @@ public enum MsgType {
     }
 
     /**
-     * @return the msgType
+     * @return String
      */
     @Override
     public String toString() {

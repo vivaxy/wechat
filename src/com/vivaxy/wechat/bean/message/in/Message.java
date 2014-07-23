@@ -1,10 +1,10 @@
-package com.vivaxy.wechat.object.msg;
+package com.vivaxy.wechat.bean.message.in;
 
 /**
  * Author : vivaxy
  * Date   : 2014/7/23 8:53
  * Project: wechat
- * Package: com.vivaxy.wechat.object.msg
+ * Package: com.vivaxy.wechat.bean.msg
  */
 public class Message {
 
@@ -34,6 +34,8 @@ public class Message {
     private String Event;
     private String EventKey;
     private String Ticket;
+    // 上报地理位置事件
+    private String Precision;
 
     public String getToUserName() {
         return ToUserName;
@@ -193,5 +195,13 @@ public class Message {
 
     public void setTicket(String ticket) {
         Ticket = ticket;
+    }
+
+    public String getPrecision() {
+        return Precision;
+    }
+
+    public void setPrecision(String precision) {
+        Precision = precision;
     }
 }

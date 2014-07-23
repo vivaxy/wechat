@@ -1,7 +1,7 @@
 package com.vivaxy.wechat.tool;
 
 import com.thoughtworks.xstream.XStream;
-import com.vivaxy.wechat.object.Conf;
+import com.vivaxy.wechat.bean.Conf;
 
 import java.io.File;
 import java.io.FileInputStream;

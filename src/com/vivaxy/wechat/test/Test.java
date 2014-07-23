@@ -3,7 +3,8 @@ package com.vivaxy.wechat.test;
 import com.thoughtworks.xstream.XStream;
 import com.vivaxy.wechat.bean.message.out.Item;
 import com.vivaxy.wechat.bean.message.out.News;
-import com.vivaxy.wechat.tool.LogUtil;
+import com.vivaxy.wechat.tool.Log;
+import com.vivaxy.wechat.tool.Mysql;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,14 +17,16 @@ import javax.servlet.http.HttpServletResponse;
  * Package: com.vivaxy.wechat.test
  */
 public class Test extends HttpServlet {
+    Log log = new Log();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");//设置返回值编码
-        TestNews();
+        TestMysqlInsert();
     }
 
     public void TestNews() {
-        LogUtil log = new LogUtil();
+
         News news = new News();
         Item item0 = new Item();
         item0.setPicUrl("setPicUrl0");
@@ -44,5 +47,12 @@ public class Test extends HttpServlet {
         xstream.alias("xml", News.class);
         xstream.alias("item", Item.class);
         log.put("", "\n" + xstream.toXML(news));
+    }
+
+    public void TestMysqlInsert() {
+        Mysql mysql = new Mysql();
+        mysql.start();
+        mysql.insert("aaa", "bbb");
+        mysql.end();
     }
 }

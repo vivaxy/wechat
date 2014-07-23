@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
     <WechatToken>Xy1234567890</WechatToken>
+    <MysqlHost>10.15.107.148</MysqlHost>
+    <MysqlPort>3306</MysqlPort>
+    <MysqlUsername>root</MysqlUsername>
+    <MysqlPassword>111111</MysqlPassword>
+    <MysqlDatabaseName>test</MysqlDatabaseName>
 </xml>

@@ -1,6 +1,5 @@
 package com.vivaxy.wechat.tool;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +9,7 @@ import java.util.Date;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class LogUtil {
+public class Log {
     public <T> void put(String tag, T message) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         String time = df.format(new Date());

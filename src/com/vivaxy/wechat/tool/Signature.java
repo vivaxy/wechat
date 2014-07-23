@@ -8,7 +8,7 @@ import java.security.MessageDigest;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class SHA1 {
+public class Signature {
     private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5',
             '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 

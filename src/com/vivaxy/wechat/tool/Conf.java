@@ -1,7 +1,7 @@
 package com.vivaxy.wechat.tool;
 
 import com.thoughtworks.xstream.XStream;
-import com.vivaxy.wechat.bean.Conf;
+import com.vivaxy.wechat.bean.Configuration;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,32 +13,31 @@ import java.io.FileNotFoundException;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class ConfUtil {
+public class Conf {
+
+    private Configuration conf;
 
     private String confPath;
 
-    public ConfUtil() {
+    public Conf() {
         String classesPath = this.getClass().getClassLoader().getResource(File.separator).getPath();
         this.confPath = classesPath + "conf.xml";
+        try {
+            File file = new File(this.confPath);
+            XStream xstream = new XStream();
+            xstream.alias("xml", Configuration.class);
+            FileInputStream fis = new FileInputStream(file);
+            this.conf = (Configuration) xstream.fromXML(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getConfPath() {
         return confPath;
     }
 
-    public String getWechatToken() {
-        String WechatToken = null;
-        try {
-            File file = new File(confPath);
-            XStream xstream = new XStream();
-            xstream.alias("xml", Conf.class);
-            FileInputStream fis = new FileInputStream(file);
-            Conf conf = (Conf) xstream.fromXML(fis);
-            WechatToken = conf.getWechatToken();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return WechatToken;
+    public Configuration getConf() {
+        return conf;
     }
-
 }

@@ -4,9 +4,11 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.vivaxy.wechat.bean.message.in.Message;
 import com.vivaxy.wechat.bean.message.in.MsgType;
-import com.vivaxy.wechat.tool.ConfUtil;
-import com.vivaxy.wechat.tool.LogUtil;
-import com.vivaxy.wechat.tool.SHA1;
+import com.vivaxy.wechat.bean.message.out.Text;
+import com.vivaxy.wechat.tool.Conf;
+import com.vivaxy.wechat.tool.Log;
+import com.vivaxy.wechat.tool.Robot;
+import com.vivaxy.wechat.tool.Signature;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
@@ -50,21 +52,27 @@ public class WechatApi extends HttpServlet {
         }
 //        将xml内容转换为InputMessage对象
         Message inputMsg = (Message) xs.fromXML(xmlMsg.toString());
-        LogUtil log = new LogUtil();
+        Log log = new Log();
         log.put("PostMessage", "\n" + xmlMsg.toString());
 //        取得消息类型
         String msgType = inputMsg.getMsgType();
         //根据消息类型获取对应的消息内容
+        String replyContent = "你说什么，我看不懂。";
         if (msgType.equals(MsgType.Text.toString())) {
-            //文本消息
-
+            String inputContent = inputMsg.getContent();
+            replyContent = new Robot().Reply(inputContent);
         }
-
+//        返回值
+        Text replyMsg = new Text();
+        replyMsg.setContent(replyContent);
+        replyMsg.setToUserName(inputMsg.getFromUserName());
+        replyMsg.setFromUserName(inputMsg.getToUserName());
+        XStream xstream = new XStream();
+        xstream.alias("xml", Text.class);
 //        输出返回值
-
         try {
             PrintWriter out = response.getWriter();
-            out.write("reply");
+            out.write(xstream.toXML(replyMsg));
             out.flush();
             out.close();
         } catch (IOException e) {
@@ -75,7 +83,7 @@ public class WechatApi extends HttpServlet {
     //    开发者提交信息后，微信服务器将发送GET请求到填写的URL上
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        LogUtil log = new LogUtil();
+        Log log = new Log();
         log.put("GetQueryString", request.getQueryString());
         response.setCharacterEncoding("UTF-8");//设置返回值编码
         Boolean result = false;//结果
@@ -85,7 +93,7 @@ public class WechatApi extends HttpServlet {
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
 //        获取微信公众号的token
-        String Token = new ConfUtil().getWechatToken();
+        String Token = new Conf().getConf().getWechatToken();
 //        传参为不为空
         if (signature != null && timestamp != null && nonce != null && echostr != null) {
 //            1. 将token、timestamp、nonce三个参数进行字典序排序
@@ -100,7 +108,7 @@ public class WechatApi extends HttpServlet {
                 }
             });
 //            2. 将三个参数字符串拼接成一个字符串进行sha1加密
-            String sha1 = SHA1.encode(params.get(0) + params.get(1) + params.get(2));
+            String sha1 = Signature.encode(params.get(0) + params.get(1) + params.get(2));
 //            3. 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
             if (sha1.equals(signature)) result = true;
         }

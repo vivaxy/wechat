@@ -6,7 +6,7 @@ package com.vivaxy.wechat.tool;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class Robot {
+public class RobotUtil {
     public String Reply(String input) {
         return input;
     }

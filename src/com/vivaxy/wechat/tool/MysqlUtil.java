@@ -1,9 +1,10 @@
 package com.vivaxy.wechat.tool;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.vivaxy.wechat.bean.MysqlData;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author : vivaxy
@@ -11,9 +12,9 @@ import java.sql.SQLException;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class Mysql {
+public class MysqlUtil {
     Connection conn;
-    PreparedStatement pst;
+
     String host;
     String port;
     String username;
@@ -21,7 +22,7 @@ public class Mysql {
     String databaseName;
 
     public void start() {
-        Conf conf = new Conf();
+        ConfUtil conf = new ConfUtil();
         this.host = conf.getConf().getMysqlHost();
         this.port = conf.getConf().getMysqlPort();
         this.username = conf.getConf().getMysqlUsername();
@@ -40,13 +41,47 @@ public class Mysql {
         }
     }
 
+    public List<MysqlData> select() {
+        List<String[]> returnValue = new ArrayList<String[]>();
+        try {
+            String sql = "";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            rs.getObject(1);
+
+            ResultSetMetaData rsmd = rs.getMetaData();
+            rsmd.getColumnName(1);
+
+            int columnCount = rsmd.getColumnCount();
+            String listHead[] = new String[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                listHead[i] = rsmd.getColumnLabel(i + 1);
+            }
+            returnValue.add(listHead);
+            while (rs.next()) {
+                String listItem[] = new String[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    listItem[i] = rs.getString(i + 1);
+                }
+                returnValue.add(listItem);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void insert(String ask, String answer) {
         try {
             String sql = "insert into test(ask, answer) VALUES(?, ?)";
-            pst = conn.prepareStatement(sql);
+            PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, ask);
             pst.setString(2, answer);
             pst.execute();
+            pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,7 +89,6 @@ public class Mysql {
 
     public void end() {
         try {
-            if (pst != null) pst.close();
             if (conn != null) conn.close();
         } catch (SQLException e) {
             e.printStackTrace();

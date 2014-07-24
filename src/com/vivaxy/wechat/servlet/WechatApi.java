@@ -5,9 +5,9 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.vivaxy.wechat.bean.message.in.Message;
 import com.vivaxy.wechat.bean.message.in.MsgType;
 import com.vivaxy.wechat.bean.message.out.Text;
-import com.vivaxy.wechat.tool.Conf;
-import com.vivaxy.wechat.tool.Log;
-import com.vivaxy.wechat.tool.Robot;
+import com.vivaxy.wechat.tool.ConfUtil;
+import com.vivaxy.wechat.tool.LogUtil;
+import com.vivaxy.wechat.tool.RobotUtil;
 import com.vivaxy.wechat.tool.Signature;
 
 import javax.servlet.ServletInputStream;
@@ -52,7 +52,7 @@ public class WechatApi extends HttpServlet {
         }
 //        将xml内容转换为InputMessage对象
         Message inputMsg = (Message) xs.fromXML(xmlMsg.toString());
-        Log log = new Log();
+        LogUtil log = new LogUtil();
         log.put("PostMessage", "\n" + xmlMsg.toString());
 //        取得消息类型
         String msgType = inputMsg.getMsgType();
@@ -60,7 +60,7 @@ public class WechatApi extends HttpServlet {
         String replyContent = "你说什么，我看不懂。";
         if (msgType.equals(MsgType.Text.toString())) {
             String inputContent = inputMsg.getContent();
-            replyContent = new Robot().Reply(inputContent);
+            replyContent = new RobotUtil().Reply(inputContent);
         }
 //        返回值
         Text replyMsg = new Text();
@@ -83,7 +83,7 @@ public class WechatApi extends HttpServlet {
     //    开发者提交信息后，微信服务器将发送GET请求到填写的URL上
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        Log log = new Log();
+        LogUtil log = new LogUtil();
         log.put("GetQueryString", request.getQueryString());
         response.setCharacterEncoding("UTF-8");//设置返回值编码
         Boolean result = false;//结果
@@ -93,7 +93,7 @@ public class WechatApi extends HttpServlet {
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
 //        获取微信公众号的token
-        String Token = new Conf().getConf().getWechatToken();
+        String Token = new ConfUtil().getConf().getWechatToken();
 //        传参为不为空
         if (signature != null && timestamp != null && nonce != null && echostr != null) {
 //            1. 将token、timestamp、nonce三个参数进行字典序排序

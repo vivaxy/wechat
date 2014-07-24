@@ -13,13 +13,13 @@ import java.io.FileNotFoundException;
  * Project: wechat
  * Package: com.vivaxy.wechat.tool
  */
-public class Conf {
+public class ConfUtil {
 
     private Configuration conf;
 
     private String confPath;
 
-    public Conf() {
+    public ConfUtil() {
         String classesPath = this.getClass().getClassLoader().getResource(File.separator).getPath();
         this.confPath = classesPath + "conf.xml";
         try {

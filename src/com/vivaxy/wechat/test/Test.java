@@ -3,8 +3,8 @@ package com.vivaxy.wechat.test;
 import com.thoughtworks.xstream.XStream;
 import com.vivaxy.wechat.bean.message.out.Item;
 import com.vivaxy.wechat.bean.message.out.News;
-import com.vivaxy.wechat.tool.Log;
-import com.vivaxy.wechat.tool.Mysql;
+import com.vivaxy.wechat.tool.LogUtil;
+import com.vivaxy.wechat.tool.MysqlUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * Package: com.vivaxy.wechat.test
  */
 public class Test extends HttpServlet {
-    Log log = new Log();
+    LogUtil log = new LogUtil();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -50,7 +50,7 @@ public class Test extends HttpServlet {
     }
 
     public void TestMysqlInsert() {
-        Mysql mysql = new Mysql();
+        MysqlUtil mysql = new MysqlUtil();
         mysql.start();
         mysql.insert("aaa", "bbb");
         mysql.end();

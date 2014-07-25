@@ -2,6 +2,7 @@ package com.vivaxy.wechat.tool;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
 
 /**
  * Author : vivaxy
@@ -12,7 +13,7 @@ import java.lang.reflect.Method;
 public class BeanUtil<T> {
     LogUtil log = new LogUtil();
 
-    public void set(T t) {
+    public void set(T t, ResultSet rs) {
         Class clazz = t.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
@@ -27,14 +28,14 @@ public class BeanUtil<T> {
                 Method methodSet = clazz.getMethod(setMethodName, new Class[]{field.getType()});
                 Method methodGet = clazz.getMethod(getMethodName, new Class[]{});
                 // 调用set方法
-                if (field.getType() == Integer.class) methodSet.invoke(t, 1);
-                if (field.getType() == Long.class) methodSet.invoke(t, 2L);
-                if (field.getType() == String.class) methodSet.invoke(t, "3");
+                if (field.getType() == Integer.class) methodSet.invoke(t, rs.getInt(property));
+                if (field.getType() == Long.class) methodSet.invoke(t, rs.getLong(property));
+                if (field.getType() == String.class) methodSet.invoke(t, rs.getString(property));
                 // 调用get方法
-                Object objValue = methodGet.invoke(t);
-                String methodGetValue = objValue == null ? "" : objValue.toString();
+//                Object objValue = methodGet.invoke(t);
+//                String methodGetValue = objValue == null ? "" : objValue.toString();
                 // 输出
-                log.put(property, methodGetValue);
+//                log.put(property, methodGetValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }

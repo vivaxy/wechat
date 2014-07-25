@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  * Project: wechat
  * Package: com.vivaxy.wechat.test
  */
-public class Test extends HttpServlet {
+public class Servlet extends HttpServlet {
     LogUtil log = new LogUtil();
 
     @Override

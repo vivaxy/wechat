@@ -6,14 +6,14 @@ package com.vivaxy.wechat.bean;
  * Project: wechat
  * Package: com.vivaxy.wechat.bean
  */
-public class MysqlData {
+public class RobotSays {
 
     private Integer id;
     private Long created;
     private Long updated;
-    private Long lastused;
+    private Long lastUsed;
     private Integer used;
-    private Integer teached;
+    private Integer taught;
     private String ask;
     private String answer;
     private Integer isValid;
@@ -42,12 +42,12 @@ public class MysqlData {
         this.updated = updated;
     }
 
-    public Long getLastused() {
-        return lastused;
+    public Long getLastUsed() {
+        return lastUsed;
     }
 
-    public void setLastused(Long lastused) {
-        this.lastused = lastused;
+    public void setLastUsed(Long lastUsed) {
+        this.lastUsed = lastUsed;
     }
 
     public Integer getUsed() {
@@ -58,12 +58,12 @@ public class MysqlData {
         this.used = used;
     }
 
-    public Integer getTeached() {
-        return teached;
+    public Integer getTaught() {
+        return taught;
     }
 
-    public void setTeached(Integer teached) {
-        this.teached = teached;
+    public void setTaught(Integer taught) {
+        this.taught = taught;
     }
 
     public String getAsk() {

@@ -1,6 +1,6 @@
 package com.vivaxy.wechat.tool;
 
-import com.vivaxy.wechat.bean.MysqlData;
+import com.vivaxy.wechat.bean.RobotSays;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -41,37 +41,23 @@ public class MysqlUtil {
         }
     }
 
-    public List<MysqlData> select() {
-        List<String[]> returnValue = new ArrayList<String[]>();
+    public List<RobotSays> select() {
+        List<RobotSays> list = new ArrayList<RobotSays>();
+        BeanUtil<RobotSays> bu = new BeanUtil<RobotSays>();
         try {
-            String sql = "";
+            String sql = "select * from test";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
-            rs.getObject(1);
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-            rsmd.getColumnName(1);
-
-            int columnCount = rsmd.getColumnCount();
-            String listHead[] = new String[columnCount];
-            for (int i = 0; i < columnCount; i++) {
-                listHead[i] = rsmd.getColumnLabel(i + 1);
-            }
-            returnValue.add(listHead);
             while (rs.next()) {
-                String listItem[] = new String[columnCount];
-                for (int i = 0; i < columnCount; i++) {
-                    listItem[i] = rs.getString(i + 1);
-                }
-                returnValue.add(listItem);
+                RobotSays robotSays = new RobotSays();
+                bu.set(robotSays, rs);
             }
             rs.close();
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return list;
     }
 
     public void insert(String ask, String answer) {

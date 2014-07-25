@@ -20,8 +20,7 @@ public class ConfUtil {
     private String confPath;
 
     public ConfUtil() {
-        String classesPath = this.getClass().getClassLoader().getResource(File.separator).getPath();
-        this.confPath = classesPath + "conf.xml";
+        this.confPath = this.getClass().getClassLoader().getResource("conf.xml").getPath();
         try {
             File file = new File(this.confPath);
             XStream xstream = new XStream();

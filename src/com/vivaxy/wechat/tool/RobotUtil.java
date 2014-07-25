@@ -36,7 +36,7 @@ public class RobotUtil {
             }
         }
         mu.end();
-        return null;
+        return "没有人教过我怎么回答这个问题TAT~\n输入--help查看帮助。";
     }
 
     private void Teach(String ask, String answer) {

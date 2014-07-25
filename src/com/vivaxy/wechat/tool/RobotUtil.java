@@ -2,6 +2,7 @@ package com.vivaxy.wechat.tool;
 
 import com.vivaxy.wechat.bean.RobotSays;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +17,14 @@ public class RobotUtil {
         if (input.startsWith("--ask")) {// teach
             String[] list = input.split("--");
             if (list[1].startsWith("ask") && list[2].startsWith("answer")) {
-                String ask = list[1].substring(3, list[1].length());
-                String answer = list[2].substring(6, list[2].length());
-                Teach(ask, answer);
-                return "哦，懂了！";
+                String ask = list[1].substring(3, list[1].length()).trim();
+                String answer = list[2].substring(6, list[2].length()).trim();
+                if (!ask.equals("") && !answer.equals("")) {
+                    Teach(ask, answer);
+                    return "哦，懂了！";
+                }
             }
+            return "输入--help获得帮助。";
         }
         if (input.equals("--help")) {// help
             return "输入--help获得帮助。\n输入--ask问题--answer答案，教我怎么回答你的问题。";
@@ -29,11 +33,18 @@ public class RobotUtil {
         MysqlUtil mu = new MysqlUtil();
         mu.start();
         List<RobotSays> robotList = mu.select();
+        List<RobotSays> answerList = new ArrayList<RobotSays>();
         for (RobotSays rs : robotList) {
             if (rs.getAsk().equals(input)) {
-                mu.updateUse(rs.getUsed(), rs.getId());
-                return rs.getAnswer();
+                answerList.add(rs);
             }
+        }
+        if (answerList.size() != 0) {
+            int random = (int) Math.floor(Math.random() * answerList.size());
+            RobotSays answer = answerList.get(random);
+            mu.updateUse(answer.getUsed(), answer.getId());
+            mu.end();
+            return answer.getAnswer();
         }
         mu.end();
         return "没有人教过我怎么回答这个问题TAT~\n输入--help查看帮助。";

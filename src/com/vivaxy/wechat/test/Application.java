@@ -1,10 +1,6 @@
 package com.vivaxy.wechat.test;
 
-import com.vivaxy.wechat.bean.RobotSays;
-import com.vivaxy.wechat.tool.LogUtil;
 import com.vivaxy.wechat.tool.MysqlUtil;
-
-import java.util.List;
 
 /**
  * Author : vivaxy
@@ -15,10 +11,9 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) throws Exception {
-        LogUtil log = new LogUtil();
         MysqlUtil mu = new MysqlUtil();
         mu.start();
-        List<RobotSays> list = mu.select();
+        mu.insert("我觉得舒服", "肯定很高");
         mu.end();
     }
 }

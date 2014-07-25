@@ -50,7 +50,8 @@ public class MysqlUtil {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 RobotSays robotSays = new RobotSays();
-                bu.set(robotSays, rs);
+                robotSays = bu.set(robotSays, rs);
+                list.add(robotSays);
             }
             rs.close();
             stmt.close();
@@ -62,10 +63,36 @@ public class MysqlUtil {
 
     public void insert(String ask, String answer) {
         try {
-            String sql = "insert into test(ask, answer) VALUES(?, ?)";
+            String sql = "insert into test(created, used, taught, ask, answer, isValid) VALUES(NOW(), 0, 1, ?, ?, 1)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, ask);
             pst.setString(2, answer);
+            pst.execute();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateUse(int used, int id) {
+        try {
+            String sql = "update test set lastUsed = NOW(), used = ? where id = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, used + 1);
+            pst.setInt(2, id);
+            pst.execute();
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTaught(int taught, int id) {
+        try {
+            String sql = "update test set taught = ? where id = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, taught + 1);
+            pst.setInt(2, id);
             pst.execute();
             pst.close();
         } catch (SQLException e) {

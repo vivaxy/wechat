@@ -1,10 +1,6 @@
 package com.vivaxy.wechat.test;
 
-import com.thoughtworks.xstream.XStream;
-import com.vivaxy.wechat.bean.message.out.Item;
-import com.vivaxy.wechat.bean.message.out.News;
 import com.vivaxy.wechat.tool.LogUtil;
-import com.vivaxy.wechat.tool.MysqlUtil;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,40 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Servlet extends HttpServlet {
     LogUtil log = new LogUtil();
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");//设置返回值编码
-        TestMysqlInsert();
-    }
 
-    public void TestNews() {
-
-        News news = new News();
-        Item item0 = new Item();
-        item0.setPicUrl("setPicUrl0");
-        item0.setDescription("setDescription0");
-        item0.setTitle("setTitle0");
-        item0.setUrl("setUrl0");
-        Item item1 = new Item();
-        item1.setPicUrl("setPicUrl1");
-        item1.setDescription("setDescription1");
-        item1.setTitle("setTitle1");
-        item1.setUrl("setUrl1");
-        news.add(item0);
-        news.add(item1);
-        news.setFromUserName("setFromUserName");
-        news.setToUserName("setToUserName");
-        news.setArticleCount(2L);
-        XStream xstream = new XStream();
-        xstream.alias("xml", News.class);
-        xstream.alias("item", Item.class);
-        log.put("", "\n" + xstream.toXML(news));
-    }
-
-    public void TestMysqlInsert() {
-        MysqlUtil mysql = new MysqlUtil();
-        mysql.start();
-        mysql.insert("aaa", "bbb");
-        mysql.end();
     }
 }

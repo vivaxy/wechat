@@ -60,7 +60,8 @@ public class WechatApi extends HttpServlet {
         String replyContent = "你说什么，我看不懂。";
         if (msgType.equals(MsgType.Text.toString())) {
             String inputContent = inputMsg.getContent();
-            replyContent = new RobotUtil().Reply(inputContent);
+            RobotUtil ru = new RobotUtil();
+            replyContent = ru.Reply(inputContent);
         }
 //        返回值
         Text replyMsg = new Text();

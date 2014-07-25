@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public class BeanUtil<T> {
     LogUtil log = new LogUtil();
 
-    public void set(T t, ResultSet rs) {
+    public T set(T t, ResultSet rs) {
         Class clazz = t.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
@@ -40,5 +40,6 @@ public class BeanUtil<T> {
                 e.printStackTrace();
             }
         }
+        return t;
     }
 }

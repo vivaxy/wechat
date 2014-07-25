@@ -45,7 +45,7 @@ public class MysqlUtil {
         List<RobotSays> list = new ArrayList<RobotSays>();
         BeanUtil<RobotSays> bu = new BeanUtil<RobotSays>();
         try {
-            String sql = "select * from test";
+            String sql = "select * from robot";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -63,7 +63,7 @@ public class MysqlUtil {
 
     public void insert(String ask, String answer) {
         try {
-            String sql = "insert into test(created, used, taught, ask, answer, isValid) VALUES(NOW(), 0, 1, ?, ?, 1)";
+            String sql = "insert into robot(created, used, taught, ask, answer, isValid) VALUES(NOW(), 0, 1, ?, ?, 1)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, ask);
             pst.setString(2, answer);
@@ -76,7 +76,7 @@ public class MysqlUtil {
 
     public void updateUse(int used, int id) {
         try {
-            String sql = "update test set lastUsed = NOW(), used = ? where id = ?";
+            String sql = "update robot set lastUsed = NOW(), used = ? where id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, used + 1);
             pst.setInt(2, id);
@@ -89,7 +89,7 @@ public class MysqlUtil {
 
     public void updateTaught(int taught, int id) {
         try {
-            String sql = "update test set taught = ? where id = ?";
+            String sql = "update robot set taught = ? where id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, taught + 1);
             pst.setInt(2, id);

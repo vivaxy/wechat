@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : root@10.15.107.148
 Source Server Version : 50077
 Source Host           : 10.15.107.148:3306
-Source Database       : test
+Source Database       : robot
 
 Target Server Type    : MYSQL
 Target Server Version : 50077
@@ -18,8 +18,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 -- Table structure for test
 -- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test` (
+DROP TABLE IF EXISTS `robot`;
+CREATE TABLE `robot` (
   `id`       INT(11)   NOT NULL AUTO_INCREMENT,
   `updated`  TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `created`  DATETIME DEFAULT NULL,

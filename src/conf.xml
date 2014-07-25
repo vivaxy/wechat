@@ -5,5 +5,5 @@
     <MysqlPort>3306</MysqlPort>
     <MysqlUsername>root</MysqlUsername>
     <MysqlPassword>111111</MysqlPassword>
-    <MysqlDatabaseName>test</MysqlDatabaseName>
+    <MysqlDatabaseName>wechat</MysqlDatabaseName>
 </xml>

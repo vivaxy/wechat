@@ -12,7 +12,7 @@ import java.util.List;
  * Package: com.vivaxy.wechat.tool
  */
 public class RobotUtil {
-    public String Reply(String input) {
+    public String reply(String input) {
         input = input.trim();
         if (input.startsWith("--")) {//system
             if (input.startsWith("--ask")) {// teach
@@ -21,7 +21,7 @@ public class RobotUtil {
                     String ask = list[1].substring(3, list[1].length()).trim();
                     String answer = list[2].substring(6, list[2].length()).trim();
                     if (!ask.equals("") && !answer.equals("")) {
-                        Teach(ask, answer);
+                        teach(ask, answer);
                         return "哦，懂了！";
                     }
                 }
@@ -52,7 +52,7 @@ public class RobotUtil {
         }
     }
 
-    private void Teach(String ask, String answer) {
+    private void teach(String ask, String answer) {
         int count = 0;
         MysqlUtil mu = new MysqlUtil();
         LogUtil log = new LogUtil();

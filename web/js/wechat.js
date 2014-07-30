@@ -17,19 +17,11 @@ function showme() {
         window.location.href = "http://wechat.nibaguai.com/cat/install.php";
     }
 }
-function share(n, m) {
-    if (m == 0) {
-        document.title = window.shareData.tTitle = "围住神经猫-根本停不下来，玩过之后我整个人都精神了！"
-    }
-    if (m == 1) {
-        document.title = window.shareData.tTitle = "我用了" + n + "步围住神经猫，击败" + (100 - n) + "%的人，你能超过我吗？"
-    }
-    if (m == 2) {
-        document.title = window.shareData.tTitle = "我没有围住它，谁能帮个忙？"
-    }
+function share(n) {
+    document.title = window.shareData.tTitle = "你输入了" + n;
     document.getElementById("sbg").className = "sbgshow";
     window.setTimeout(hiddenMe, 5000);
-    $("#myfav").css("display", "none");
+    document.getElementById("myfav").style.display = "none";
 }
 
 function hiddenMe() {

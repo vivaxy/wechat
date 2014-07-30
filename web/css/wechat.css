@@ -53,3 +53,7 @@
 .sbg p {
     padding-top: 78px;
 }
+
+#myfav {
+    display: none;
+}

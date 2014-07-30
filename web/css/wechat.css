@@ -18,7 +18,7 @@
     right: 8px;
     width: 100px;
     height: 100px;
-    background: url(http://baby.ci123.com/yunqi/m/weixin/images/arron.png) no-repeat;
+    background: url(../img/arron.png) no-repeat;
     background-size: 100px 100px;
 }
 
@@ -46,14 +46,10 @@
     right: 8px;
     width: 100px;
     height: 100px;
-    background: url(http://baby.ci123.com/yunqi/m/weixin/images/arron.png) no-repeat;
+    background: url(../img/arron.png) no-repeat;
     background-size: 100px 100px;
 }
 
 .sbg p {
     padding-top: 78px;
-}
-
-#myfav {
-    display: none;
 }

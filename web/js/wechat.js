@@ -9,8 +9,9 @@ window.shareData = {
     "tTitle": "this is a title",
     "tContent": "this is a content"
 };
-function share(n) {
-    document.title = window.shareData.tTitle = n;
+function share(title, content) {
+    document.title = window.shareData.tTitle = title;
+    window.shareData.tContent = content;
     document.getElementById("sbg").className = "sbgshow";
     window.setTimeout(hiddenMe, 5000);
 }

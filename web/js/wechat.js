@@ -5,7 +5,7 @@
  */
 window.shareData = {
     "imgUrl": "http://www.baidu.com/img/baidu_sylogo1.gif",
-    "timeLineLink": "http://vivaxy.github.io/wechat/",
+    "timeLineLink": "http://vivaxy.github.io/wechat/web/",
     "tTitle": "this is a title",
     "tContent": "this is a content"
 };
@@ -36,7 +36,7 @@ function hiddenMe() {
     document.getElementById("sbg").className = "sbg";
 }
 
-var mebtnopenurl = 'http://vivaxy.github.io/wechat/';
+var mebtnopenurl = 'http://vivaxy.github.io/wechat/web/';
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 
     WeixinJSBridge.on('menu:share:appmessage', function (argv) {

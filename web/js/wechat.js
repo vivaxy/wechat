@@ -22,7 +22,7 @@ function hiddenMe() {
 var mebtnopenurl = 'http://vivaxy.github.io/wechat/web/';
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 
-    WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+    WeixinJSBridge.on('menu:share:appmessage', function (argv) {//发送给好友
         WeixinJSBridge.invoke('sendAppMessage', {
             "img_url": window.shareData.imgUrl,
             "link": window.shareData.timeLineLink,
@@ -33,7 +33,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
         })
     });
 
-    WeixinJSBridge.on('menu:share:timeline', function (argv) {
+    WeixinJSBridge.on('menu:share:timeline', function (argv) {//分享到朋友圈
         WeixinJSBridge.invoke('shareTimeline', {
             "img_url": window.shareData.imgUrl,
             "img_width": "640",
@@ -47,7 +47,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     });
 
 
-    WeixinJSBridge.on('menu:share:weibo', function (argv) {
+    WeixinJSBridge.on('menu:share:weibo', function (argv) {//分享到微博
         WeixinJSBridge.invoke('shareWeibo', {
             "content": window.shareData.tContent,
             "url": window.shareData.timeLineLink

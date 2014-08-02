@@ -11,7 +11,6 @@ import com.vivaxy.wechat.tool.RobotUtil;
 public class Application {
 
     public static void main(String[] args) throws Exception {
-        String s = "asdf";
-        System.out.print(new RobotUtil().reply(s));
+        System.out.print(new RobotUtil().replyNews("1", "2"));
     }
 }

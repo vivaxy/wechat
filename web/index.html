@@ -3,20 +3,19 @@
 <head lang="en">
     <link rel="shortcut icon" href="/x.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link type="text/css" rel="stylesheet" href="css/wechat.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>wechat</title>
 </head>
 <body>
-<div id="sbg" class="sbg">
-    <div class="arron"></div>
-    <p id="msg">请点击右上角<br/>点击【分享到朋友圈】<br/>分享到朋友圈 do something</p>
-</div>
-<label>请输入标题</label><br/>
-<input type="text" id="title"/><br/>
-<label>请输入摘要</label><br/>
-<input type="text" id="content"/><br/>
-<button onclick="share(document.getElementById('title').value,document.getElementById('content').value);">share</button>
+<script>
+    function getQueryStringByName(name) {
+        var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+        if (result == null || result.length < 1) {
+            return "";
+        }
+        return result[1];
+    }
+    document.write(getQueryStringByName("openid"));
+</script>
 </body>
-<script type="text/javascript" src="js/wechat.js"></script>
 </html>

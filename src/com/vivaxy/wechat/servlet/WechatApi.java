@@ -3,8 +3,6 @@ package com.vivaxy.wechat.servlet;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.vivaxy.wechat.bean.message.in.Message;
-import com.vivaxy.wechat.bean.message.in.MsgType;
-import com.vivaxy.wechat.bean.message.out.Text;
 import com.vivaxy.wechat.tool.ConfUtil;
 import com.vivaxy.wechat.tool.LogUtil;
 import com.vivaxy.wechat.tool.RobotUtil;
@@ -50,33 +48,12 @@ public class WechatApi extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        将xml内容转换为InputMessage对象
-        Message inputMsg = (Message) xs.fromXML(xmlMsg.toString());
-        LogUtil log = new LogUtil();
-        log.put("PostMessage", "\n" + xmlMsg.toString());
-//        取得消息类型
-        String msgType = inputMsg.getMsgType();
-        //根据消息类型获取对应的消息内容
-        String replyContent = "你说什么，我看不懂。";
-        if (msgType.equals(MsgType.Text.toString())) {
-            String inputContent = inputMsg.getContent();
-            RobotUtil ru = new RobotUtil();
-            replyContent = ru.reply(inputContent);
-        }
-        if (msgType.equals(MsgType.Event.toString())) {
-            if (inputMsg.getEvent().equals("subscribe")) replyContent = "欢迎关注维瓦克西微信公众号。\n回复帮助查看帮助。";
-        }
-//        返回值
-        Text replyMsg = new Text();
-        replyMsg.setContent(replyContent);
-        replyMsg.setToUserName(inputMsg.getFromUserName());
-        replyMsg.setFromUserName(inputMsg.getToUserName());
-        XStream xstream = new XStream();
-        xstream.alias("xml", Text.class);
+        RobotUtil ru = new RobotUtil();
+        String outputMsg = ru.replyMsg(xmlMsg.toString());
 //        输出返回值
         try {
             PrintWriter out = response.getWriter();
-            out.write(xstream.toXML(replyMsg));
+            out.write(outputMsg);
             out.flush();
             out.close();
         } catch (IOException e) {

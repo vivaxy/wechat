@@ -49,6 +49,8 @@ public class WechatApi extends HttpServlet {
             e.printStackTrace();
         }
         RobotUtil ru = new RobotUtil();
+        LogUtil log = new LogUtil();
+        log.put("PostMessage", "\n" + xmlMsg);
         String outputMsg = ru.replyMsg(xmlMsg.toString());
 //        输出返回值
         try {
@@ -97,7 +99,7 @@ public class WechatApi extends HttpServlet {
         try {
             PrintWriter out = response.getWriter();
             if (result) out.write(echostr);
-            else out.write("unknown request");
+            else out.write("Got ya!");
             out.flush();
             out.close();
         } catch (IOException e) {

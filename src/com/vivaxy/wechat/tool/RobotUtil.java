@@ -19,19 +19,20 @@ import java.util.List;
  * Package: com.vivaxy.wechat.tool
  */
 public class RobotUtil {
-    public String replyMsg(String xmlMsg) {
+    public String replyMsg(String xml) {
+        LogUtil log = new LogUtil();
 //        将xml内容转换为InputMessage对象
         XStream xs = new XStream(new DomDriver());
-        Message inputMsg = (Message) xs.fromXML(xmlMsg);
-        LogUtil log = new LogUtil();
-        log.put("PostMessage", "\n" + xmlMsg);
+        //一定要alias啊
+        xs.alias("xml", Message.class);
+        Message inputMsg = (Message) xs.fromXML(xml);
 //        取得消息类型
         String msgType = inputMsg.getMsgType();
         //根据消息类型获取对应的消息内容
-
         if (msgType.equals(MsgType.Text.toString())) {
             String inputContent = inputMsg.getContent();
-            if (inputContent == "游戏") {
+            log.put("inputContent", inputContent);
+            if (inputContent.equals("游戏")) {
                 return replyNews(inputMsg.getFromUserName(), inputMsg.getToUserName());
             }
             return replyText(robotReply(inputContent), inputMsg.getFromUserName(), inputMsg.getToUserName());
@@ -49,10 +50,10 @@ public class RobotUtil {
         replyMsg.setFromUserName(FromUserName);
         replyMsg.setArticleCount(1L);
         Item item = new Item();
-        item.setPicUrl("http://www.baidu.com/img/baidu_sylogo1.gif");
+        item.setPicUrl("http://himg.bdimg.com/sys/portrait/item/c618766976617879a706.jpg");
         item.setDescription("点击进入游戏");
-        item.setTitle("小游戏1");
-        item.setUrl("http://vivaxy.github.io/wechat/web/index.html&openid=" + ToUserName);
+        item.setTitle("弱智游戏");
+        item.setUrl("http://vivaxy.github.io/wechat/web/index.html?openid=" + ToUserName);
         replyMsg.add(item);
         XStream xstream = new XStream();
         xstream.alias("xml", News.class);

@@ -20,10 +20,9 @@ import java.util.List;
  */
 public class RobotUtil {
     public String replyMsg(String xml) {
-        LogUtil log = new LogUtil();
 //        将xml内容转换为InputMessage对象
         XStream xs = new XStream(new DomDriver());
-        //一定要alias啊
+//            将指定节点下的xml节点数据映射为对象
         xs.alias("xml", Message.class);
         Message inputMsg = (Message) xs.fromXML(xml);
 //        取得消息类型
@@ -31,7 +30,6 @@ public class RobotUtil {
         //根据消息类型获取对应的消息内容
         if (msgType.equals(MsgType.Text.toString())) {
             String inputContent = inputMsg.getContent();
-            log.put("inputContent", inputContent);
             if (inputContent.equals("游戏")) {
                 return replyNews(inputMsg.getFromUserName(), inputMsg.getToUserName());
             }

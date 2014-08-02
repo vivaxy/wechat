@@ -1,8 +1,5 @@
 package com.vivaxy.wechat.servlet;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.vivaxy.wechat.bean.message.in.Message;
 import com.vivaxy.wechat.tool.ConfUtil;
 import com.vivaxy.wechat.tool.LogUtil;
 import com.vivaxy.wechat.tool.RobotUtil;
@@ -34,12 +31,9 @@ public class WechatApi extends HttpServlet {
         response.setContentType("text/xml;charset=UTF-8");//设置返回格式为xml
 
 //        接受消息
-        XStream xs = new XStream(new DomDriver());
         StringBuilder xmlMsg = new StringBuilder();
         try {
             ServletInputStream inputStream = request.getInputStream();
-//            将指定节点下的xml节点数据映射为对象
-            xs.alias("xml", Message.class);
 //            将流转换为字符串
             byte[] b = new byte[4096];
             for (int n; (n = inputStream.read(b)) != -1; ) {
@@ -52,6 +46,7 @@ public class WechatApi extends HttpServlet {
         LogUtil log = new LogUtil();
         log.put("PostMessage", "\n" + xmlMsg);
         String outputMsg = ru.replyMsg(xmlMsg.toString());
+        log.put("outputMsg", "\n" + outputMsg);
 //        输出返回值
         try {
             PrintWriter out = response.getWriter();

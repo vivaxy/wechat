@@ -1,6 +1,6 @@
 package com.vivaxy.wechat.test;
 
-import com.vivaxy.wechat.tool.MysqlUtil;
+import com.vivaxy.wechat.tool.RobotUtil;
 
 /**
  * Author : vivaxy
@@ -11,9 +11,7 @@ import com.vivaxy.wechat.tool.MysqlUtil;
 public class Application {
 
     public static void main(String[] args) throws Exception {
-        MysqlUtil mu = new MysqlUtil();
-        mu.start();
-        mu.insert("我觉得舒服", "肯定很高");
-        mu.end();
+        String s = "asdf";
+        System.out.print(new RobotUtil().reply(s));
     }
 }

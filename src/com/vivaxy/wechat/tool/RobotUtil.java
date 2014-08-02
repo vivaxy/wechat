@@ -14,22 +14,17 @@ import java.util.List;
 public class RobotUtil {
     public String reply(String input) {
         input = input.trim();
-        if (input.startsWith("--")) {//system
-            if (input.startsWith("--ask")) {// teach
-                String[] list = input.split("--");
-                if (list.length >= 3 && list[1].startsWith("ask") && list[2].startsWith("answer")) {
-                    String ask = list[1].substring(3, list[1].length()).trim();
-                    String answer = list[2].substring(6, list[2].length()).trim();
-                    if (!ask.equals("") && !answer.equals("")) {
-                        teach(ask, answer);
-                        return "哦，懂了！";
-                    }
+        if (input.startsWith("问 ") && input.contains(" 答 ")) {
+            String[] list = input.split(" 答 ");
+            if (list.length == 2) {//teach
+                String ask = list[0].substring(2, list[0].length()).trim();
+                String answer = list[1].trim();
+                if (!ask.equals("") && !answer.equals("")) {
+                    teach(ask, answer);
+                    return "学会了，现在问我" + ask + "试试看~";
                 }
             }
-            if (input.equals("--help")) {// help
-                return "输入--help获得帮助。\n输入--ask问题--answer答案，教我怎么回答你的问题。";
-            }
-            return "输入--help获得帮助。";
+            return "回复帮助查看帮助。";
         } else {//answer
             MysqlUtil mu = new MysqlUtil();
             mu.start();
@@ -48,7 +43,7 @@ public class RobotUtil {
                 return answer.getAnswer();
             }
             mu.end();
-            return "没有人教过我怎么回答这个问题TAT~\n输入--help查看帮助。";
+            return "没有人教过我怎么回答这个问题TAT~\n回复帮助查看帮助。";
         }
     }
 

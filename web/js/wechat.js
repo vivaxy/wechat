@@ -9,16 +9,16 @@ window.shareData = {
     "tTitle": "this is a title",
     "tContent": "this is a content"
 };
-function share(title, content) {
+var share = function (title, content) {
     document.title = window.shareData.tTitle = title;
     window.shareData.tContent = content;
     document.getElementById("sbg").className = "sbgshow";
     window.setTimeout(hiddenMe, 5000);
-}
+};
 
-function hiddenMe() {
+var hiddenMe = function () {
     document.getElementById("sbg").className = "sbg";
-}
+};
 
 var mebtnopenurl = 'http://vivaxy.github.io/wechat/web/';
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {

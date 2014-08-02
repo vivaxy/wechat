@@ -64,7 +64,7 @@ public class WechatApi extends HttpServlet {
             replyContent = ru.reply(inputContent);
         }
         if (msgType.equals(MsgType.Event.toString())) {
-            if (inputMsg.getEvent().equals("subscribe")) replyContent = "欢迎关注维瓦克西微信公众号。\n输入--help获得帮助。";
+            if (inputMsg.getEvent().equals("subscribe")) replyContent = "欢迎关注维瓦克西微信公众号。\n回复帮助查看帮助。";
         }
 //        返回值
         Text replyMsg = new Text();

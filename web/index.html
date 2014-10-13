@@ -15,7 +15,10 @@
         }
         return result[1];
     }
-    document.write("openid = " + getQueryStringByName("openid") + "<br />ua = " + navigator.userAgent + "<br/ >" + navigator.userAgent.toLowerCase().match(/Windows Phone/i));
+    document.write("openid = " + getQueryStringByName("openid") + "<br /><br />" +
+            "ua = " + navigator.userAgent + "<br/ ><br />" +
+            "innerHeight = " + window.innerHeight + "<br/ ><br />" +
+            "innerWidth = " + window.innerWidth);
 </script>
 </body>
 </html>

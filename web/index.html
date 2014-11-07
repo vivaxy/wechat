@@ -15,12 +15,10 @@
         }
         return result[1];
     }
-    document.write("openid = " + getQueryStringByName("openid") + "<br /><br />" +
+    document.body.innerHTML = "openid = " + getQueryStringByName("openid") + "<br /><br />" +
             "ua = " + navigator.userAgent + "<br/ ><br />" +
             "innerHeight = " + window.innerHeight + "<br/ ><br />" +
-            "innerWidth = " + window.innerWidth + "<br/ ><br />" +
-            "<a href=\"weixin://addfriend/vivaxy\">follow vivaxy</a>" + "<br/ ><br />" +
-            "<a href=\"weixin://addfriend/vivaxy2012\">follow vivaxy2012</a>");
+            "innerWidth = " + window.innerWidth;
 </script>
 </body>
 </html>

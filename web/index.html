@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link rel="shortcut icon" href="/x.png">
+    <link type="image/png" rel="shortcut icon" href="/vivaxy.icon.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>wechat</title>
@@ -18,7 +18,8 @@
     document.body.innerHTML = "openid = " + getQueryStringByName("openid") + "<br /><br />" +
             "ua = " + navigator.userAgent + "<br/ ><br />" +
             "innerHeight = " + window.innerHeight + "<br/ ><br />" +
-            "innerWidth = " + window.innerWidth;
+            "innerWidth = " + window.innerWidth +
+            "cookie = " + document.cookie;
 </script>
 </body>
 </html>

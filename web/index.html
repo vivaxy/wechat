@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <link type="image/png" rel="shortcut icon" href="/vivaxy.icon.png">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>wechat</title>
 </head>
 <body>
@@ -15,11 +15,11 @@
         }
         return result[1];
     }
-    document.body.innerHTML = "openid = " + getQueryStringByName("openid") + "<br><br>" +
-            "ua = " + navigator.userAgent + "<br><br>" +
-            "innerHeight = " + window.innerHeight + "<br><br>" +
-            "innerWidth = " + window.innerWidth + "<br><br>" +
-            "cookie = " + document.cookie;
+    document.body.innerHTML = "<p>openid = " + getQueryStringByName("openid") + "</p>" +
+            "<p>ua = " + navigator.userAgent + "</p>" +
+            "<p>innerHeight = " + window.innerHeight + "</p>" +
+            "<p>innerWidth = " + window.innerWidth + "</p>" +
+            "<p>cookie = " + document.cookie + "</p>";
 </script>
 </body>
 </html>

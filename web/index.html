@@ -16,31 +16,41 @@
         }
         return result[1];
     }
-    document.body.innerHTML = "<pre>" + JSON.stringify({
-                'openid': getQueryStringByName("openid"),
-                'platform': navigator.platform,
-                'user-agent': navigator.userAgent,
-                'location': location.href,
-                'referrer': document.referrer,
-                'devicePixelRatio': window.devicePixelRatio,
-                'screen': {
-                    'height': window.screen.height,
-                    'width': window.screen.width,
-                    'avail-height': window.screen.availHeight,
-                    'avail-width': window.screen.availWidth,
-                    'avail-top': window.screen.availTop,
-                    'avail-left': window.screen.availLeft,
-                    'color-depth': window.screen.colorDepth,
-                    'pixel-depth': window.screen.pixelDepth,
-                    'orientation': {
-                        'angle': window.screen.orientation.angle,
-                        'type': window.screen.orientation.type
-                    }
-                },
-                'cookie': document.cookie,
-                'client-width': document.body.clientWidth,
-                'client-height': document.body.clientHeight
-            }, null, '    ') + "</pre>";
+
+    var window$screen = window.screen;
+    var window$screen$orientation = window$screen.orientation;
+    var document$body = document.body;
+
+    var output = {
+        'openid': getQueryStringByName("openid"),
+        'platform': navigator.platform,
+        'user-agent': navigator.userAgent,
+        'location': location.href,
+        'referrer': document.referrer,
+        'devicePixelRatio': window.devicePixelRatio,
+        'screen': {
+            'height': window$screen.height,
+            'width': window$screen.width,
+            'avail-height': window$screen.availHeight,
+            'avail-width': window$screen.availWidth,
+            'avail-top': window$screen.availTop,
+            'avail-left': window$screen.availLeft,
+            'color-depth': window$screen.colorDepth,
+            'pixel-depth': window$screen.pixelDepth
+        },
+        'cookie': document.cookie,
+        'client-width': document$body.clientWidth,
+        'client-height': document$body.clientHeight
+    };
+
+    if (window$screen$orientation) {
+        output.screen.orientation = {
+            'angle': window$screen$orientation.angle,
+            'type': window$screen$orientation.type
+        }
+    }
+
+    document.body.innerHTML = "<pre>" + JSON.stringify(output, null, '    ') + "</pre>";
 </script>
 </body>
 </html>
